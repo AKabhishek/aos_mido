@@ -29,10 +29,12 @@
 #include <stdlib.h>
 #include <sys/sysinfo.h>
 
+#include <android-base/logging.h>
+#include <android-base/properties.h>
 #include "vendor_init.h"
 #include "property_service.h"
-#include "log.h"
-#include "util.h"
+
+using android::init::property_set;
 
 char const *heapstartsize;
 char const *heapgrowthlimit;
