@@ -219,6 +219,11 @@ on post-fs-data
     # Create directory used for camera
     mkdir /data/vendor/camera 0770 camera camera
 
+    # Create PERFD deamon related dirs
+    mkdir /data/system/perfd 2770 root system
+    rm /data/system/perfd/default_values
+    start perfd
+
     #Create directories for Fingerprint
     mkdir /data/vendor/misc/qti_fp 0770 system system
     mkdir /data/vendor/misc/qti_fp/bg_estimation 0770 system system
@@ -620,6 +625,14 @@ service gx_fpd /system/bin/gx_fpd
      group system system
      writepid /dev/cpuset/system-background/tasks
 
+service perfd /system/vendor/bin/perfd
+    class main
+    user root
+    group root readproc
+    disabled
+    socket perfd seqpacket 0666 root system
+    writepid /dev/cpuset/system-background/tasks
+
 on property:sys.fp.vendor=switchf
     stop gx_fpd
     setprop sys.fp.vendor searchf
@@ -634,3 +647,4 @@ on property:sys.fp.onstart=1
    setprop ro.boot.fpsensor gdx
    setprop ro.hardware.fingerprint goodix
    start fps_hal
+
