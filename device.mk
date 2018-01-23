@@ -46,3 +46,9 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf
+
+# OTA Configs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ota.romname=Atomic-OS \
+    ro.ota.version=$(shell date +"%Y%m%d") \
+    ro.ota.manifest=https://raw.githubusercontent.com/TeamDarkness-Devices/ota_devices/master/mido.xml
