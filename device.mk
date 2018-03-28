@@ -36,6 +36,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-service.xiaomi_mido
 
+# Properties
+-include device/xiaomi/mido/prop.mk
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.mido.rc
