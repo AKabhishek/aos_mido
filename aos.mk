@@ -16,16 +16,25 @@
 
 $(call inherit-product, device/xiaomi/mido/full_mido.mk)
 
-# Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common Atomic-OS stuff.
+$(call inherit-product, vendor/aos/config/common.mk)
 
-PRODUCT_NAME := lineage_mido
+PRODUCT_NAME := aos_mido
 BOARD_VENDOR := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="mido-user 7.0 NRD90M V8.5.4.0.NCFMIED release-keys"
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    DEVICE_MAINTAINERS="Abhishek AK"
+
+# OTA Configs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ota.romname=Atomic-OS \
+    ro.ota.version=$(shell date +"%Y%m%d") \
+    ro.ota.manifest=https://raw.githubusercontent.com/TeamDarkness-Devices/ota_devices/master/mido.xml
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := "xiaomi/mido/mido:7.0/NRD90M/V8.5.4.0.NCFMIED:user/release-keys"
